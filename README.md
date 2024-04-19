@@ -24,7 +24,6 @@ Create UI with forms to add/edit data.
 Display list of data.
 Ability to delete data.
 
-
 ### Backend (be/):
 
 APIs to create, read, update, and delete data.

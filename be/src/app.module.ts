@@ -4,6 +4,7 @@ import { DataConnection } from './data.db';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DataDao } from './data.dao';
+import { TodosModule } from './todos/todos.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { DataDao } from './data.dao';
       maxPoolSize: 100,
     }),
     DataConnection,
+    TodosModule,
   ],
   controllers: [AppController],
   providers: [
