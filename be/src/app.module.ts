@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DataConnection } from './data.db';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DataDao } from './data.dao';
 import { TodosModule } from './todos/todos.module';
+import { TodosController } from './todos/todos.controller';
+import { TodoDao } from './todos/todo.dao';
+import { TodoConnection } from './todos/todo.db';
 
 @Module({
   imports: [
@@ -13,13 +14,10 @@ import { TodosModule } from './todos/todos.module';
       connectionName: 'local',
       maxPoolSize: 100,
     }),
-    DataConnection,
     TodosModule,
+    TodoConnection,
   ],
-  controllers: [AppController],
-  providers: [
-    AppService,
-    DataDao
-  ],
+  controllers: [AppController, TodosController],
+  providers: [AppService, TodoDao],
 })
 export class AppModule {}
