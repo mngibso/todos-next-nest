@@ -1,3 +1,12 @@
-import { ToDo } from '../todo.db';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
-export class UpdateTodoDto extends ToDo {}
+// use PATCH, fields not required
+export class UpdateTodoDto {
+  @IsOptional()
+  @IsString()
+  task?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  done?: boolean;
+}

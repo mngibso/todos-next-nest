@@ -6,7 +6,11 @@ import {
   Patch,
   Param,
   Delete,
+  HttpException,
+  HttpStatus,
+  Res,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { TodoDao } from './todo.dao';
 import { CreateTodoDto } from './dto/create-todo.dto';
@@ -26,17 +30,34 @@ export class TodosController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.todosService.get(id);
+  async findOne(@Param('id') id: string) {
+    const todo = await this.todosService.get(id);
+    if (!todo) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+    return todo;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
-    return this.todosService.update(id, updateTodoDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateTodoDto: UpdateTodoDto,
+    @Res() res: Response,
+  ) {
+    const todo = await this.todosService.update(id, updateTodoDto);
+    if (!todo) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+    res.status(HttpStatus.NO_CONTENT).send();
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.todosService.delete(id);
+  async remove(@Param('id') id: string, @Res() res: Response) {
+    const todo = await this.todosService.delete(id);
+    console.log({ todo });
+    if (!todo) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+    res.status(HttpStatus.NO_CONTENT).send();
   }
 }

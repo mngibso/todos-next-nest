@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ToDo } from './todo.db';
 import { UpdateTodoDto } from './dto/update-todo.dto';
+import { CreateTodoDto } from './dto/create-todo.dto';
 
 @Injectable()
 export class TodoDao {
@@ -18,22 +19,18 @@ export class TodoDao {
     return this.toDoModel.find();
   }
 
-  async create(toDo: ToDo) {
+  async create(toDo: CreateTodoDto) {
     await this.toDoModel.create(toDo);
   }
   async update(id: string, toDo: UpdateTodoDto) {
     const updatedTodo = await this.toDoModel.findOneAndUpdate(
       { _id: id },
       toDo,
-      { new: true },
     );
-    if (!updatedTodo) {
-      return null;
-    }
     return updatedTodo;
   }
 
-  async delete(id: string) {
-    await this.toDoModel.deleteOne({ _id: id });
+  delete(id: string) {
+    return this.toDoModel.findOneAndDelete({ _id: id });
   }
 }
