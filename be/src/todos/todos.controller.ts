@@ -54,7 +54,6 @@ export class TodosController {
   @Delete(':id')
   async remove(@Param('id') id: string, @Res() res: Response) {
     const todo = await this.todosService.delete(id);
-    console.log({ todo });
     if (!todo) {
       throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
     }
