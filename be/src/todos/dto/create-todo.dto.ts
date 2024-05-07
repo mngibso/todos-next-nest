@@ -1,11 +1,11 @@
-import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
+// DTO class is bound to the request body
 export class CreateTodoDto {
   @IsNotEmpty()
   @IsString()
   task: string;
 
-  @IsOptional()
   @IsBoolean()
-  done?: boolean;
+  done: boolean;
 }

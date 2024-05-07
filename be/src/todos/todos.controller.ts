@@ -12,14 +12,15 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { UpdateTodoDto } from './dto/update-todo.dto';
-import { TodoDao } from './todo.dao';
+import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 
 @Controller('todos')
 export class TodosController {
-  constructor(private readonly todosService: TodoDao) {}
+  constructor(private readonly todosService: TodoService) {}
 
   @Post()
+  // @Body() decorator with DTO class triggers the validation pipe
   create(@Body() createTodoDto: CreateTodoDto) {
     return this.todosService.create(createTodoDto);
   }

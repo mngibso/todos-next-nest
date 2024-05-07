@@ -4,33 +4,31 @@ import { Model } from 'mongoose';
 import { ToDo } from './todo.db';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { CreateTodoDto } from './dto/create-todo.dto';
+import { CONNECTION_NAME } from '../constants';
 
+// TodoService provides an interface to the DB
 @Injectable()
-export class TodoDao {
+export class TodoService {
   constructor(
-    @InjectModel(ToDo.name, 'local')
-    private toDoModel: Model<ToDo>,
+    @InjectModel(ToDo.name, CONNECTION_NAME)
+    private todos: Model<ToDo>,
   ) {}
   async get(id: string) {
-    return this.toDoModel.findById(id);
+    return this.todos.findById(id);
   }
 
   async getAll() {
-    return this.toDoModel.find();
+    return this.todos.find();
   }
 
   async create(toDo: CreateTodoDto) {
-    await this.toDoModel.create(toDo);
+    await this.todos.create(toDo);
   }
   async update(id: string, toDo: UpdateTodoDto) {
-    const updatedTodo = await this.toDoModel.findOneAndUpdate(
-      { _id: id },
-      toDo,
-    );
-    return updatedTodo;
+    return this.todos.findOneAndUpdate({ _id: id }, toDo);
   }
 
   delete(id: string) {
-    return this.toDoModel.findOneAndDelete({ _id: id });
+    return this.todos.findOneAndDelete({ _id: id });
   }
 }

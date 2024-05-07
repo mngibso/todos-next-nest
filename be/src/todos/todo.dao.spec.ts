@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TodoDao } from './todo.dao';
+import { TodoService } from './todo.service';
 import { ToDo } from './todo.db';
 import { getModelToken } from '@nestjs/mongoose';
 
 const toDoModel = jest.fn();
 describe('TodoDao', () => {
-  let service: TodoDao;
+  let service: TodoService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -14,11 +14,11 @@ describe('TodoDao', () => {
           provide: getModelToken(ToDo.name, 'local'),
           useValue: toDoModel,
         },
-        TodoDao,
+        TodoService,
       ],
     }).compile();
 
-    service = module.get<TodoDao>(TodoDao);
+    service = module.get<TodoService>(TodoService);
   });
 
   it('should be defined', () => {

@@ -1,13 +1,13 @@
 import { MongooseModule, Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { v4 as uuid_v4 } from 'uuid';
+import { CONNECTION_NAME } from '../constants';
 
+// Maps ToDo class to MongoDB 'ToDos' collection
 @Schema({
-  collection: 'ToDo',
+  collection: 'ToDos',
   autoCreate: true,
-  timestamps: {
-    createdAt: 'created',
-  },
 })
+// Our ToDo objects class
 export class ToDo {
   @Prop({ type: String, default: uuid_v4 })
   _id?: string;
@@ -19,14 +19,16 @@ export class ToDo {
   done: boolean;
 }
 
-export const ToDoSchema = SchemaFactory.createForClass(ToDo);
+// Create a mongoose schema
+const ToDoSchema = SchemaFactory.createForClass(ToDo);
 
-export const ToDoCollection = {
-  name: ToDo.name,
-  schema: ToDoSchema,
-};
-
+// This MongooseModule is used as a DB connection for accessing ToDos
 export const TodoConnection = MongooseModule.forFeature(
-  [ToDoCollection],
-  'local',
+  [
+    {
+      name: ToDo.name,
+      schema: ToDoSchema,
+    },
+  ],
+  CONNECTION_NAME,
 );
