@@ -1,6 +1,6 @@
 # Interview Coding Challenge
 
-Welcome to the Fluint.io hands-on coding assignment. The goal of this assignment is NOT to create a production-level
+The goal of this assignment is NOT to create a production-level
 service but to allow us to see how you naturally go about implementing solutions to problems.
 
 ## Prerequisites
