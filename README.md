@@ -10,12 +10,6 @@ The following tools need to be installed on your development machine:
 * Docker Desktop
 * docker-compose
 
-## Submission Steps:
-
-1. Fork or degit (link https://github.com/Rich-Harris/degit) this repository.
-2. Evaluate the README.md and solve the issues laid out in the scenario.
-3. Send any questions for clarification to jon@fluint.io.
-4. Submit your application by emailing a link to your solution and resume to jon@fluint.io.
 
 ## The Scenario
 
@@ -102,5 +96,4 @@ docker-compose -f docker-compose.cli.yml run --rm be-cli bash
 
 ## NOTES
 
-- IMPORTANT: CORS is not enabled so make sure to use mode: 'no-cors' on all api calls to the BE
 - Commands from the compose file docker-compose.cli.yml run in a container but are mounted to your local file system. 
