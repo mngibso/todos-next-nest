@@ -1,46 +1,54 @@
 "use client";
 
-import {useEffect, useState} from "react"
-import TodoItem from "@/app/todo-item";
+import React, {MouseEventHandler, useEffect, useRef, useState} from "react"
+import TodoItem from "@/app/components/todo-item";
 import {ToDo} from "@/app/types/todo";
 import {create as addTodo, getAll} from "@/app/api/todos";
 
 const ToDos = () => {
 
-    const revalidatedData = async () => {
+    // initialize state
+    const [loadData, setLoadData] = useState(true); // data should be reloaded
+    const [todos, setTodos] = useState<ToDo[]>([])
+    const [newTodo, setNewTodo] = useState<string>("")
+    const inputRef = useRef<HTMLInputElement>(null);
+
+
+    const refreshData = async () => {
         return getAll();
     }
 
-    const [loadData, setLoadData] = useState(true);
-    const [todos, setTodos] = useState<ToDo[]>([])
-    const [newTodo, setNewTodo] = useState<string>("")
-
-    // @ts-ignore
-    const setNew = ({target: {value}}) => {
-        setNewTodo(value);
-    }
+    // Add new to do event handler
     const add = async () => {
-        // don't save empty item
-        if (!newTodo) {
+        // Get the value directly from the input field
+        const newTodoText = inputRef.current?.value.trim();
+
+        // Don't save empty item
+        if (!newTodoText) {
             return;
         }
-        await addTodo({task: newTodo});
-        setNewTodo("");
+        await addTodo({ task: newTodoText });
+
+        // Clear the input field
+        if(inputRef.current) {
+            inputRef.current.value = "";
+        }
+        // reload todos
         setLoadData(true);
     }
 
+    // fetch fresh ToDo data
     useEffect(() => {
         if (!loadData)
             return;
 
         setLoadData(false)
 
-        revalidatedData()
+        refreshData()
             .then(res => {
                 setTodos(res)
             })
     }, [loadData])
-
 
     return (
         <>
@@ -51,8 +59,7 @@ const ToDos = () => {
                 <div className="new-todo">
                     <input
                         type="text"
-                        value={newTodo}
-                        onChange={setNew}
+                        ref={inputRef}
                     />
                     <button className="save action" onClick={add}>Add ToDo</button>
                 </div>

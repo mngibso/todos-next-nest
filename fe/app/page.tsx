@@ -1,8 +1,6 @@
 "use client";
 
-import {useEffect, useState} from "react"
-import ToDos from "@/app/todos";
-import {getAll} from "@/app/api/todos";
+import ToDos from "@/app/components/todos";
 
 const Page = () => {
     return (
