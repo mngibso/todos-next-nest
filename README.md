@@ -46,53 +46,58 @@ The Mongoose configuration is in place for communication between the BE Nest.js 
 
 For the FE project:
 
-Copy code
-
+```
 docker-compose -f docker-compose.cli.yml run --rm fe-cli npm install
+```
+
 For the BE project:
 
-Copy code
 
+```
 docker-compose -f docker-compose.cli.yml run --rm be-cli npm install
-Start the application
-Copy code
+```
 
+Start the application
+
+```
 docker-compose up
+```
+
 Note: This will start up the application and make the frontend of the application available from a browser
 at http://localhost:8080/, and the backend API is available at http://localhost:3000/. Changes on the backend will be
 hot deployed to the container.
 
 ### Stop the application
 
-Copy code
-
+```
 docker-compose down
+```
 
 ### Install a new library
 
 For the FE project:
 
-Copy code
-
+```
 docker-compose -f docker-compose.cli.yml run --rm fe-cli npm i <package>
+```
 For the BE project:
 
-Copy code
-
+```
 docker-compose -f docker-compose.cli.yml run --rm be-cli npm i <package>
+```
 
 ### Bash for a project
 
 For the FE project:
 
-Copy code
-
+```
 docker-compose -f docker-compose.cli.yml run --rm fe-cli bash
+```
 For the BE project:
 
-Copy code
-
+```
 docker-compose -f docker-compose.cli.yml run --rm be-cli bash
+```
 
 ## NOTES
 
