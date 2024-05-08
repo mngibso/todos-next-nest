@@ -1,7 +1,7 @@
 # Interview Coding Challenge
 
-The goal of this assignment is NOT to create a production-level
-service but to allow us to see how you naturally go about implementing solutions to problems.
+The goal of this assignment is NOT to create a production-level service
+but to allow us to see how you naturally go about implementing solutions to problems.
 
 ## Prerequisites
 
@@ -10,26 +10,22 @@ The following tools need to be installed on your development machine:
 * Docker Desktop
 * docker-compose
 
-
 ## The Scenario
 
-Build a simple form that allows users to create, edit, and delete data.
+Build a simple web application that allows users to create, edit, and delete data.
+Store Data in a mongodb
 
 This will involve:
 
 ### Frontend (fe/):
 
-Create UI with forms to add/edit data.
-Display list of data.
-Ability to delete data.
+* Create UI with ability to add/edit/delete data.
+* Display list of data.
 
 ### Backend (be/):
 
-APIs to create, read, update, and delete data.
-Store data in a MongoDB database.
-Database (mongodb/):
-
-Collect data with fields like id, and content.
+* APIs to create, read, update, and delete data.
+* Store data in a MongoDB database.
 
 ## The Environment
 

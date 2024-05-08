@@ -1,6 +1,6 @@
 "use client";
 
-import React, {MouseEventHandler, useEffect, useRef, useState} from "react"
+import React, { useEffect, useRef, useState} from "react"
 import TodoItem from "@/app/components/todo-item";
 import {ToDo} from "@/app/types/todo";
 import {create as addTodo, getAll} from "@/app/api/todos";
@@ -10,7 +10,6 @@ const ToDos = () => {
     // initialize state
     const [loadData, setLoadData] = useState(true); // data should be reloaded
     const [todos, setTodos] = useState<ToDo[]>([])
-    const [newTodo, setNewTodo] = useState<string>("")
     const inputRef = useRef<HTMLInputElement>(null);
 
 

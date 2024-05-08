@@ -6,6 +6,7 @@ export class CreateTodoDto {
   @IsString()
   task: string;
 
+  @IsNotEmpty()
   @IsBoolean()
   done: boolean;
 }

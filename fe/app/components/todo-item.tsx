@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useRef, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {ToDo} from "@/app/types/todo";
 import {del as deleteTodo, update as saveTodo} from "@/app/api/todos";
 
@@ -6,7 +6,7 @@ import {del as deleteTodo, update as saveTodo} from "@/app/api/todos";
 /**
  * Render a single ToDo item. allow user to edit or delete item.
  * @param {ToDo} todo - The todo item
- * @param {function} refresh - called to signal data should be refreshed
+ * @param {function} refresh - call `refresh(true)` to signal data should be refreshed.
  * @constructor
  */
 export default function TodoItem({todo, refresh}: { todo: ToDo, refresh:  React.Dispatch<React.SetStateAction<boolean>> }) {
